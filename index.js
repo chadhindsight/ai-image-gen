@@ -5,6 +5,9 @@ const port = process.env.PORT || 5050;
 
 const app = express();
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }))
+
 app.use('/openai', require('./routes/openaiRoutes'))
 
 app.listen(port, () => {
