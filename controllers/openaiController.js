@@ -1,7 +1,32 @@
+const { OpenAIApi } = require("openai")
+
 const generateImage = async (req, res) => {
-    res.status(200).json({
-        success: true,
-    });
+    try {
+        const response = await openai.createImage({
+            prompt: 'Polar bear on ice skates',
+            n: 1,
+            size: '512x512'
+        })
+
+        const iamgeUrl = response.data.data[0].url
+
+        res.status(200).json({
+            success: true,
+            data: iamgeUrl
+        })
+    }
+    catch (error) {
+        if (error.response) {
+            console.log(error.response.status);
+            console.log(error.response.data);
+        } else {
+            console.log(error.message);
+        }
+        res.status(400).json({
+            success: false,
+            message: 'Image could not be generated :('
+        })
+    }
 }
 
 module.exports = { generateImage }
