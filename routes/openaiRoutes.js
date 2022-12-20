@@ -8,7 +8,7 @@ const configuration = new Configuration({
     apiKey: process.env.OPENAI_API_KEY,
 });
 const openai = new OpenAIApi(configuration);
-
+// image generation
 router.post('/generateimage', (req, res) => {
     res.status(200).json({
         success: true,
